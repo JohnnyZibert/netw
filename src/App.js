@@ -7,7 +7,7 @@ import { Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 const App = (props) => {
-    return (
+    return ( <div>
             <div className='app-wrapper'>
                 <Header />
                 <Navbar />
@@ -19,6 +19,7 @@ const App = (props) => {
                            render={ () => <Profile store={props.store} /> }/>
                 </div>
             </div>
+    </div>
         )
 }
 
