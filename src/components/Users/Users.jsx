@@ -1,29 +1,9 @@
 import React from "react";
 import style from './Users.module.css'
-<<<<<<< HEAD
-import userPhoto from '../../../src/assets/imges/kartinka-na-avatar-dlya-devushki-9.jpg'
-import axios from "axios";
-
-const Users = (props) => {
-   let getUsers=() => {
-
-       if (props.users.length === 0) {
-           axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-               props.setUsers(response.data.items);
-           });
-       }
-   }
-    return <div>
-        <button onClick={getUsers}> Get users</button>
-        {
-            props.users.map(u => <div key={u.id}>
-            <span>
-                <div>
-                <img src={u.photos.small != null ? u.photos.small : userPhoto} className={style.userPhoto} alt={'photos'}/>
-=======
 import userPhoto from '../../assets/images/ava2.jpg'
-
-
+import {NavLink} from "react-router-dom";
+import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 
 const Users = (props) => {
@@ -46,52 +26,42 @@ const Users = (props) => {
             })}
         </div>
         {
-           props.users.map(u => <div key={u.id}>
+            props.users.map(u => <div key={u.id}>
 
             <span>
                 <div>
+                    <NavLink to={'/profile/' + u.id}>
                 <img src={u.photos.small != null ? u.photos.small : userPhoto} className={style.userPhoto}
                      alt={'photos'}/>
->>>>>>> addDialogPage
+                        </NavLink>
             </div>
                 <div>
                 {u.followed
-                    ? <button onClick={() => {
-                        props.unFollow(u.id)
-                    }}>Unfollow</button>
-                    : <button onClick={() => {
-<<<<<<< HEAD
-                        props.follow(u.id)
-=======
-                       props.follow(u.id)
->>>>>>> addDialogPage
-                    }}>Follow</button>
+                    ? <button disabled={props.followingInProgress.some(id => id === (u.id))} onClick={() => {
+                        props.unfollow(u.id)}}>Unfollow</button>
+                    : <button disabled={props.followingInProgress.some(id => id === (u.id))} onClick={() => {
+                        props.follow(u.id)}}>Follow</button>
                 }
 
-            </div>
-            </span>
+                    </div>
+                    </span>
                 <span>
-                        <span>
-                            <div>{u.name}</div>
-                            <div>{u.status}</div>
-                       </span>
+                    <span>
+                    <div>{u.name}</div>
+                    <div>{u.status}</div>
+                    </span>
 
-                <span>
+                    <span>
                     <div>{'u.location.country'}</div>
                     <div>{'u.location.cities'}</div>
-                </span>
-                            </span>
+                    </span>
+                    </span>
 
             </div>)
         }
     </div>
-<<<<<<< HEAD
-}
-
-=======
 
 }
 
 
->>>>>>> addDialogPage
 export default Users;
